@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "43fc2b38-5bb6-4415-b63a-57be68f16913",
+		"name": "Grocery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "allGrocery",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Get all grocery datas\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    for(var i = 0; i < jsonData.foods.length; i++)\r",
+							"        console.log(jsonData.foods[i]);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Get data from json by name\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    for(var i = 0; i < jsonData.foods.length; i++) {\r",
+							"        if (jsonData.foods[i].name == \"apple\") {\r",
+							"            break;\r",
+							"        }else{\r",
+							"            pm.expect(jsonData.foods[0].name,\"Apple could not find in json data\").to.be.eql(\"\");\r",
+							"        }\r",
+							"    }\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/allGrocery",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"allGrocery"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All Food",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/allGrocery",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"allGrocery"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"foods\": [\n        {\n            \"id\": 1,\n            \"name\": \"apple\",\n            \"price\": 3,\n            \"stock\": 100\n        },\n        {\n            \"id\": 2,\n            \"name\": \"grapes\",\n            \"price\": 5,\n            \"stock\": 50\n        }\n    ]\n}"
+				},
+				{
+					"name": "Get Food By Name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/allGrocery?name=grapes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"allGrocery"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "grapes"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\n    \"id\": 2,\n    \"name\": \"grapes\",\n    \"price\": 5,\n    \"stock\": 50\n}"
+				},
+				{
+					"name": "Get Food By Name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/allGrocery?name=apple",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"allGrocery"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "apple"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"apple\",\n    \"price\": 3,\n    \"stock\": 100\n}"
+				},
+				{
+					"name": "Get Food By Name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/allGrocery/food",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"allGrocery",
+								"food"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "text",
+					"header": null,
+					"cookie": [],
+					"body": "404 Not Found"
+				}
+			]
+		},
+		{
+			"name": "Add Food",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/addFood",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"addFood"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Set Food Grocery",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/addFood",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"addFood"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"message\" : \"Operation was successfully\"\r\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
